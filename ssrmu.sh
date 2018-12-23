@@ -4,13 +4,13 @@ export PATH
 
 #=================================================
 #	System Required: CentOS 6+/Debian 6+/Ubuntu 14.04+
-#	Description: Install the ShadowsocksR mudbjson server
-#	Version: 1.0.26
-#	Author: Toyo
-#	Blog: https://doub.io/ss-jc60/
+#	Description: Install the ShadowsocksR admin server
+#	Version: 0.0.0
+#	Author: admin
+#	Blog: https://baidu.com/
 #=================================================
 
-sh_ver="1.0.26"
+sh_ver="0.0.0"
 filepath=$(cd "$(dirname "$0")"; pwd)
 file=$(echo -e "${filepath}"|awk -F "$0" '{print $1}')
 ssr_folder="/usr/local/shadowsocksr"
@@ -72,7 +72,7 @@ BBR_installation_status(){
 	if [[ ! -e ${BBR_file} ]]; then
 		echo -e "${Error} 没有发现 BBR脚本，开始下载..."
 		cd "${file}"
-		if ! wget -N --no-check-certificate https://raw.githubusercontent.com/Redundant2333/doubi/master/bbr.sh; then
+		if ! wget -N --no-check-certificate https://raw.githubusercontent.com/Redundant2333/SSRkjaz/master/bbr.sh; then
 			echo -e "${Error} BBR 脚本下载失败 !" && exit 1
 		else
 			echo -e "${Info} BBR 脚本下载完成 !"
@@ -282,7 +282,7 @@ ss_link_qr(){
 	SSbase64=$(urlsafe_base64 "${method}:${password}@${ip}:${port}")
 	SSurl="ss://${SSbase64}"
 	SSQRcode="http://doub.pw/qr/qr.php?text=${SSurl}"
-	ss_link=" SS    链接 : ${Green_font_prefix}${SSurl}${Font_color_suffix} \n SS  二维码 : ${Green_font_prefix}${SSQRcode}${Font_color_suffix}"
+	ss_link=" SS    链接 : ${Green_font_prefix}${SSurl}${Font_color_suffix} \n SS  
 }
 ssr_link_qr(){
 	SSRprotocol=$(echo ${protocol} | sed 's/_compatible//g')
@@ -291,7 +291,7 @@ ssr_link_qr(){
 	SSRbase64=$(urlsafe_base64 "${ip}:${port}:${SSRprotocol}:${method}:${SSRobfs}:${SSRPWDbase64}")
 	SSRurl="ssr://${SSRbase64}"
 	SSRQRcode="http://doub.pw/qr/qr.php?text=${SSRurl}"
-	ssr_link=" SSR   链接 : ${Red_font_prefix}${SSRurl}${Font_color_suffix} \n SSR 二维码 : ${Red_font_prefix}${SSRQRcode}${Font_color_suffix} \n "
+	ssr_link=" SSR   链接 : ${Red_font_prefix}${SSRurl}${Font_color_suffix} \n 
 }
 ss_ssr_determine(){
 	protocol_suffix=`echo ${protocol} | awk -F "_" '{print $NF}'`
@@ -366,15 +366,14 @@ View_User_info(){
 	echo -e "${ss_link}"
 	echo -e "${ssr_link}"
 	echo -e " ${Green_font_prefix} 提示: ${Font_color_suffix}
- 在浏览器中，打开二维码链接，就可以看到二维码图片。
  协议和混淆后面的[ _compatible ]，指的是 兼容原版协议/混淆。"
 	echo && echo "==================================================="
 }
 # 设置 配置信息
 Set_config_user(){
 	echo "请输入要设置的用户 用户名(请勿重复, 用于区分, 不支持中文、空格, 会报错 !)"
-	read -e -p "(默认: doubi):" ssr_user
-	[[ -z "${ssr_user}" ]] && ssr_user="doubi"
+	read -e -p "(默认: admin):" ssr_user
+	[[ -z "${ssr_user}" ]] && ssr_user="admin"
 	ssr_user=$(echo "${ssr_user}"|sed 's/ //g')
 	echo && echo ${Separator_1} && echo -e "	用户名 : ${Green_font_prefix}${ssr_user}${Font_color_suffix}" && echo ${Separator_1} && echo
 }
@@ -399,8 +398,8 @@ Set_config_port(){
 }
 Set_config_password(){
 	echo "请输入要设置的用户 密码"
-	read -e -p "(默认: doub.io):" ssr_password
-	[[ -z "${ssr_password}" ]] && ssr_password="doub.io"
+	read -e -p "(默认: admin):" ssr_password
+	[[ -z "${ssr_password}" ]] && ssr_password="admin"
 	echo && echo ${Separator_1} && echo -e "	密码 : ${Green_font_prefix}${ssr_password}${Font_color_suffix}" && echo ${Separator_1} && echo
 }
 Set_config_method(){
@@ -853,7 +852,7 @@ Debian_apt(){
 # 下载 ShadowsocksR
 Download_SSR(){
 	cd "/usr/local"
-	wget -N --no-check-certificate "https://github.com/zhanyu666/shadowsocksr/archive/manyuser.zip"
+	wget -N --no-check-certificate "https://github.com/Redundant2333/shadowsocksr/archive/manyuser.zip"
 	#git config --global http.sslVerify false
 	#env GIT_SSL_NO_VERIFY=true git clone -b manyuser https://github.com/Redundant2333/shadowsocksr.git
 	#[[ ! -e ${ssr_folder} ]] && echo -e "${Error} ShadowsocksR服务端 下载失败 !" && exit 1
@@ -877,14 +876,14 @@ Download_SSR(){
 }
 Service_SSR(){
 	if [[ ${release} = "centos" ]]; then
-		if ! wget --no-check-certificate https://raw.githubusercontent.com/Redundant2333/doubi/master/service/ssrmu_centos -O /etc/init.d/ssrmu; then
+		if ! wget --no-check-certificate https://raw.githubusercontent.com/Redundant2333/SSRkjaz/master/service/ssrmu_centos -O /etc/init.d/ssrmu; then
 			echo -e "${Error} ShadowsocksR服务 管理脚本下载失败 !" && exit 1
 		fi
 		chmod +x /etc/init.d/ssrmu
 		chkconfig --add ssrmu
 		chkconfig ssrmu on
 	else
-		if ! wget --no-check-certificate https://raw.githubusercontent.com/Redundant2333/doubi/master/service/ssrmu_debian -O /etc/init.d/ssrmu; then
+		if ! wget --no-check-certificate https://raw.githubusercontent.com/Redundant2333/SSRkjaz/master/service/ssrmu_debian -O /etc/init.d/ssrmu; then
 			echo -e "${Error} ShadowsocksR服务 管理脚本下载失败 !" && exit 1
 		fi
 		chmod +x /etc/init.d/ssrmu
@@ -979,7 +978,7 @@ Uninstall_SSR(){
 }
 Check_Libsodium_ver(){
 	echo -e "${Info} 开始获取 libsodium 最新版本..."
-	Libsodiumr_ver=$(wget -qO- "https://github.com/jedisct1/libsodium/tags"|grep "/jedisct1/libsodium/releases/tag/"|head -1|sed -r 's/.*tag\/(.+)\">.*/\1/')
+	Libsodiumr_ver=$(wget -qO- "https://github.com/Redundant2333/libsodium/tags"|grep "/Redundant2333/libsodium/releases/tag/"|head -1|sed -r 's/.*tag\/(.+)\">.*/\1/')
 	[[ -z ${Libsodiumr_ver} ]] && Libsodiumr_ver=${Libsodiumr_ver_backup}
 	echo -e "${Info} libsodium 最新版本为 ${Green_font_prefix}${Libsodiumr_ver}${Font_color_suffix} !"
 }
@@ -1000,7 +999,7 @@ Install_Libsodium(){
 		echo -e "${Info} 安装依赖..."
 		yum -y groupinstall "Development Tools"
 		echo -e "${Info} 下载..."
-		wget  --no-check-certificate -N "https://github.com/jedisct1/libsodium/releases/download/${Libsodiumr_ver}/libsodium-${Libsodiumr_ver}.tar.gz"
+		wget  --no-check-certificate -N "https://github.com/Redundant2333/libsodium/releases/download/${Libsodiumr_ver}/libsodium-${Libsodiumr_ver}.tar.gz"
 		echo -e "${Info} 解压..."
 		tar -xzf libsodium-${Libsodiumr_ver}.tar.gz && cd libsodium-${Libsodiumr_ver}
 		echo -e "${Info} 编译安装..."
@@ -1011,7 +1010,7 @@ Install_Libsodium(){
 		echo -e "${Info} 安装依赖..."
 		apt-get install -y build-essential
 		echo -e "${Info} 下载..."
-		wget  --no-check-certificate -N "https://github.com/jedisct1/libsodium/releases/download/${Libsodiumr_ver}/libsodium-${Libsodiumr_ver}.tar.gz"
+		wget  --no-check-certificate -N "https://github.com/Redundant2333/libsodium/releases/download/${Libsodiumr_ver}/libsodium-${Libsodiumr_ver}.tar.gz"
 		echo -e "${Info} 解压..."
 		tar -xzf libsodium-${Libsodiumr_ver}.tar.gz && cd libsodium-${Libsodiumr_ver}
 		echo -e "${Info} 编译安装..."
@@ -1541,8 +1540,8 @@ Configure_LotServer(){
 }
 Install_LotServer(){
 	[[ -e ${LotServer_file} ]] && echo -e "${Error} LotServer 已安装 !" && exit 1
-	#Github: https://github.com/0oVicero0/serverSpeeder_Install
-	wget --no-check-certificate -qO /tmp/appex.sh "https://raw.githubusercontent.com/0oVicero0/serverSpeeder_Install/master/appex.sh"
+	#Github: https://github.com/Redundant2333/serverSpeeder_Install
+	wget --no-check-certificate -qO /tmp/appex.sh "https://raw.githubusercontent.com/Redundant2333/serverSpeeder_Install/master/appex.sh"
 	[[ ! -e "/tmp/appex.sh" ]] && echo -e "${Error} LotServer 安装脚本下载失败 !" && exit 1
 	bash /tmp/appex.sh 'install'
 	sleep 2s
@@ -1558,7 +1557,7 @@ Uninstall_LotServer(){
 	read -e -p "(默认: n):" unyn
 	[[ -z ${unyn} ]] && echo && echo "已取消..." && exit 1
 	if [[ ${unyn} == [Yy] ]]; then
-		wget --no-check-certificate -qO /tmp/appex.sh "https://raw.githubusercontent.com/0oVicero0/serverSpeeder_Install/master/appex.sh" && bash /tmp/appex.sh 'uninstall'
+		wget --no-check-certificate -qO /tmp/appex.sh "https://raw.githubusercontent.com/Redundant2333/serverSpeeder_Install/master/appex.sh" && bash /tmp/appex.sh 'uninstall'
 		echo && echo "LotServer 卸载完成 !" && echo
 	fi
 }
@@ -1645,12 +1644,12 @@ Other_functions(){
 }
 # 封禁 BT PT SPAM
 BanBTPTSPAM(){
-	wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ban_iptables.sh && chmod +x ban_iptables.sh && bash ban_iptables.sh banall
+	wget -N --no-check-certificate https://raw.githubusercontent.com/Redundant2333/SSRkjaz/master/ban_iptables.sh && chmod +x ban_iptables.sh && bash ban_iptables.sh banall
 	rm -rf ban_iptables.sh
 }
 # 解封 BT PT SPAM
 UnBanBTPTSPAM(){
-	wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ban_iptables.sh && chmod +x ban_iptables.sh && bash ban_iptables.sh unbanall
+	wget -N --no-check-certificate https://raw.githubusercontent.com/Redundant2333/SSRkjaz/master/ban_iptables/master/ban_iptables.sh && chmod +x ban_iptables.sh && bash ban_iptables.sh unbanall
 	rm -rf ban_iptables.sh
 }
 Set_config_connect_verbose_info(){
@@ -1751,14 +1750,14 @@ crontab_monitor_ssr_cron_stop(){
 	fi
 }
 Update_Shell(){
-	sh_new_ver=$(wget --no-check-certificate -qO- -t1 -T3 "https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ssrmu.sh"|grep 'sh_ver="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1) && sh_new_type="github"
+	sh_new_ver=$(wget --no-check-certificate -qO- -t1 -T3 "https://raw.githubusercontent.com/Redundant2333/SSRkjaz/master/ssrmu.sh"|grep 'sh_ver="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1) && sh_new_type="github"
 	[[ -z ${sh_new_ver} ]] && echo -e "${Error} 无法链接到 Github !" && exit 0
 	if [[ -e "/etc/init.d/ssrmu" ]]; then
 		rm -rf /etc/init.d/ssrmu
 		Service_SSR
 	fi
 	cd "${file}"
-	wget -N --no-check-certificate "https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ssrmu.sh" && chmod +x ssrmu.sh
+	wget -N --no-check-certificate "https://raw.githubusercontent.com/Redundant2333/SSRkjaz/master/ssrmu.sh" && chmod +x ssrmu.sh
 	echo -e "脚本已更新为最新版本[ ${sh_new_ver} ] !(注意：因为更新方式为直接覆盖当前运行的脚本，所以可能下面会提示一些报错，无视即可)" && exit 0
 }
 # 显示 菜单状态
@@ -1783,8 +1782,8 @@ if [[ "${action}" == "clearall" ]]; then
 elif [[ "${action}" == "monitor" ]]; then
 	crontab_monitor_ssr
 else
-	echo -e "  ShadowsocksR MuJSON一键管理脚本 ${Red_font_prefix}[v${sh_ver}]${Font_color_suffix}
-  ---- Toyo | doub.io/ss-jc60 ----
+	echo -e "  ShadowsocksR admin一键管理脚本 ${Red_font_prefix}[v${sh_ver}]${Font_color_suffix}
+  ---- 0.0.0 | admin/SSR-ss ----
 
   ${Green_font_prefix}1.${Font_color_suffix} 安装 ShadowsocksR
   ${Green_font_prefix}2.${Font_color_suffix} 更新 ShadowsocksR
