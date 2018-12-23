@@ -366,7 +366,7 @@ View_User_info(){
 	echo -e "${ss_link}"
 	echo -e "${ssr_link}"
 	echo -e " ${Green_font_prefix} 提示: ${Font_color_suffix}
- 协议和混淆后面的[ _compatible ]，指的是 兼容原版协议/混淆。"
+ 开心每一天，才是最重要的。"
 	echo && echo "==================================================="
 }
 # 设置 配置信息
@@ -956,7 +956,7 @@ Install_SSR(){
 }
 Update_SSR(){
 	SSR_installation_status
-	echo -e "因破娃暂停更新ShadowsocksR服务端，所以此功能临时禁用。"
+	echo -e "致敬破娃，但。。。还是无法更新。"
 	#cd ${ssr_folder}
 	#git pull
 	#Restart_SSR
@@ -1800,8 +1800,8 @@ if [[ "${action}" == "clearall" ]]; then
 elif [[ "${action}" == "monitor" ]]; then
 	crontab_monitor_ssr
 else
-	echo -e "  ShadowsocksR admin一键管理脚本 ${Red_font_prefix}[v${sh_ver}]${Font_color_suffix}
-  ---- admin | SSR/ss ----
+	echo -e "  ShadowsocksR ss v2ray 管理脚本 ${Red_font_prefix}[v${sh_ver}]${Font_color_suffix}
+  ---- SSR/ss/v2ray | admin ----
 
   ${Green_font_prefix}1.${Font_color_suffix} 安装 ShadowsocksR
   ${Green_font_prefix}2.${Font_color_suffix} 更新 ShadowsocksR
