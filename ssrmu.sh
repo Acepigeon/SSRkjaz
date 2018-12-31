@@ -1558,8 +1558,8 @@ Configure_LotServer(){
 }
 Install_LotServer(){
 	[[ -e ${LotServer_file} ]] && echo -e "${Error} LotServer 已安装 !" && exit 1
-	#Github: https://github.com/Alextraszaa/serverSpeeder_Install
-	wget --no-check-certificate -qO /tmp/appex.sh "https://raw.githubusercontent.com/Alextraszaa/serverSpeeder_Install/master/appex.sh"
+	#Github: https://github.com/Alextraszaa/Speed-sharp
+	wget --no-check-certificate -qO /tmp/appex.sh "https://raw.githubusercontent.com/Alextraszaa/Speed-sharp/master/appex.sh"
 	[[ ! -e "/tmp/appex.sh" ]] && echo -e "${Error} LotServer 安装脚本下载失败 !" && exit 1
 	bash /tmp/appex.sh 'install'
 	sleep 2s
@@ -1575,7 +1575,7 @@ Uninstall_LotServer(){
 	read -e -p "(默认: n):" unyn
 	[[ -z ${unyn} ]] && echo && echo "已取消..." && exit 1
 	if [[ ${unyn} == [Yy] ]]; then
-		wget --no-check-certificate -qO /tmp/appex.sh "https://raw.githubusercontent.com/Alextraszaa/serverSpeeder_Install/master/appex.sh" && bash /tmp/appex.sh 'uninstall'
+		wget --no-check-certificate -qO /tmp/appex.sh "https://raw.githubusercontent.com/Alextraszaa/Speed-sharp/master/appex.sh" && bash /tmp/appex.sh 'uninstall'
 		echo && echo "LotServer 卸载完成 !" && echo
 	fi
 }
